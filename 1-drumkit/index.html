@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>DrumKit</title>
+    <style>
+        body
+        {
+            background: center / cover no-repeat url('piano.jpg');
+            height: 100vh;
+            margin: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .keys-container
+        {
+            display: flex;
+            justify-content: space-around;
+            width: 90%;
+        }
+
+        .keys-container button
+        {
+            cursor: pointer;
+            border: 3px solid #000;
+            border-radius: 3px;
+            background: #000000ad;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            height: 70px;
+            width: 70px;
+            padding: 20px;
+            color: #fff;
+            font-size: 24px;
+            font-weight: 700;
+            transition: all .07s ease;
+            text-shadow: 0 0 .5rem black;
+        }
+
+        .keys-container button.playing
+        {
+            border-color: #ffa500;
+            transform: scale(1.2);
+            box-shadow: 0 0 1rem #ffa500;
+        }
+
+        .keys-container button .small
+        {
+            color: #ffa500;
+            font-size: 14px;
+            font-weight: 100;
+        }
+
+    </style>
+</head>
+<body>
+    
+    <div class="keys-container">
+        <button data-key="65" data-audio="./sounds/clap.wav">
+            <span>A</span>
+            <span class="small">CLAP</span>
+        </button>
+        <button data-key="83" data-audio="./sounds/hihat.wav">
+            <span>S</span>
+            <span class="small">HIHAT</span>
+        </button>
+        <button data-key="68" data-audio="./sounds/kick.wav">
+            <span>D</span>
+            <span class="small">KICK</span>
+        </button>
+        <button data-key="70" data-audio="./sounds/openhat.wav">
+            <span>F</span>
+            <span class="small">OPENHAT</span>
+        </button>
+        <button data-key="71" data-audio="./sounds/boom.wav">
+            <span>G</span>
+            <span class="small">BOOM</span>
+        </button>
+        <button data-key="72" data-audio="./sounds/ride.wav">
+            <span>H</span>
+            <span class="small">RIDE</span>
+        </button>
+        <button data-key="74" data-audio="./sounds/snare.wav">
+            <span>J</span>
+            <span class="small">SNARE</span>
+        </button>
+        <button data-key="75" data-audio="./sounds/tom.wav">
+            <span>K</span>
+            <span class="small">TOM</span>
+        </button>
+        <button data-key="76" data-audio="./sounds/tink.wav">
+            <span>L</span>
+            <span class="small">TINK</span>
+        </button>
+    </div>
+
+    <script>
+
+        function playAudio(event)
+        {
+            let keyCode     = event.keyCode;
+            let button      = document.querySelector(`.keys-container button[data-key='${keyCode}']`);
+            if(!button) return;
+            let audio_src   = button.dataset.audio;
+            let audio       = new Audio(audio_src);
+
+            button.classList.add('playing');
+
+            audio.currentTime = 0;
+            audio.play();
+        }
+
+        function resetEffect(event)
+        {
+            let keyCode     = event.keyCode;
+            let button      = document.querySelector(`.keys-container button[data-key='${keyCode}']`);
+            if(!button) return;
+           
+            button.classList.remove('playing');
+        }
+
+        document.addEventListener('keydown',playAudio);
+
+        document.addEventListener('keyup', resetEffect);
+
+    </script>
+</body>
+</html>

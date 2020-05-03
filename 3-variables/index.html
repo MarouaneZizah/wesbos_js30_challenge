@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width= , initial-scale=1.0">
+	<title>Document</title>
+
+	<style>
+		:root{
+			--margin: 20px;
+			--padding: 20px;
+			--blur: 5px;
+			--color: red;
+		}
+
+		body{
+			background-color: rgb(13, 0, 71);
+		}
+
+		label{
+			color: #fff;
+			margin-left: 40px;
+			margin-left: 20px;
+		}
+
+		.controls{
+			display: flex;
+			justify-content: center;
+			align-items: center;
+			margin-bottom: 20px;
+		}
+
+		.output{
+			display: flex;
+			justify-content: center;
+			align-items: center;
+		}
+
+		.output img{
+			width: 500px;
+			height: auto;
+			background-color: var(--color);
+			margin: var(--margin);
+			padding: var(--padding);
+			filter: blur(var(--blur));
+		}
+	</style>
+</head>
+<body>
+	
+	<div class="controls">
+		<label for="padding">Padding</label>
+		<input type="range" id="padding" name="padding" min="0" max="100" data-unit="px">
+	
+		<label for="margin">Margin</label>
+		<input type="range" id="margin" name="margin" min="0" max="100" data-unit="px">
+	
+		<label for="blur">Blur</label>
+		<input type="range" id="blur" name="blur" min="0" max="100" data-unit="px">
+
+		<label for="color">Background color</label>
+		<input type="color" name="color">
+	</div>
+
+	<div class="output">
+		<img src="/c1160c096d58961887db67f725894a10.jpg" alt="">
+	</div>
+
+	<script>
+
+		const controls = document.querySelectorAll('.controls input');
+
+		function updateVaribale() {
+			const suffix = this.dataset.unit || '';
+			document.documentElement.style.setProperty(`--${this.name}`, this.value + suffix);
+		}
+		
+		controls.forEach(control => control.addEventListener('change', updateVaribale));
+		controls.forEach(control => control.addEventListener('mousemove', updateVaribale));
+		
+	</script>
+</body>
+</html>

@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <meta http-equiv="X-UA-Compatible" content="ie=edge">
+        <title>Document</title>
+        <style>
+			body{
+				background-color: grey;
+				display: flex;
+				justify-content: center;
+				align-items: center;
+				height: 100vh;
+				margin: 0;
+				padding: 0;
+			}
+			.clock{
+				border-radius: 50%;
+				width: 200px;
+				height: 200px;
+				border:5px solid #fff;
+				position: relative;
+			}
+			.hand{
+				height: 0;
+				position: absolute;
+				top: 50%;
+				border-radius: 5px;
+				transform: rotate(90deg);
+				transform-origin: 100%;
+				transition: all 0.05s;
+				border: 2px solid #000;
+			}
+			.hour{
+				width: 60px;
+				margin-left: 40px;
+			}
+			.minute{
+				width: 90px;
+				margin-left: 10px;
+			}
+			.second{
+				width: 90px;
+				margin-left: 10px;
+			}
+        </style>
+    </head>
+
+    <body>
+        <div class="clock">
+			<div class="hand hour"></div>
+			<div class="hand minute"></div>
+			<div class="hand second"></div>
+		</div>
+
+        <script>
+
+			setInterval(() => {
+				let date = new Date();
+
+				let deg_seconds = (date.getSeconds() / 60) * 360 + 90;
+				let deg_minutes = (date.getMinutes() / 60) * 360 +90;
+				let deg_hours 	= (date.getHours() / 12) * 360 + 90;
+
+				document.querySelector(".hour").style.transform = `rotate(${deg_hours}deg)`;
+				document.querySelector(".minute").style.transform = `rotate(${deg_minutes}deg)`;
+				document.querySelector(".second").style.transform = `rotate(${deg_seconds}deg)`;
+			}, 1000);
+
+        </script>
+    </body>
+</html>
